@@ -1,24 +1,16 @@
 package dev.patika.VetClinic.service;
 
 import dev.patika.VetClinic.core.config.ModelMapper.IModelMapperService;
-import dev.patika.VetClinic.core.exception.AnimalNotFoundException;
-import dev.patika.VetClinic.core.result.Result;
-import dev.patika.VetClinic.core.result.ResultData;
-import dev.patika.VetClinic.core.utilies.ResultHelper;
 import dev.patika.VetClinic.dao.IAnimalRepo;
+import dev.patika.VetClinic.dto.animal.AnimalResponse;
 import dev.patika.VetClinic.dto.animal.AnimalSaveRequest;
 import dev.patika.VetClinic.dto.animal.AnimalUpdateRequest;
-import dev.patika.VetClinic.dto.animal.AnimalResponse;
-import dev.patika.VetClinic.dto.customer.CustomerResponse;
 import dev.patika.VetClinic.entities.Animal;
-import dev.patika.VetClinic.entities.Customer;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,100 +20,71 @@ public class AnimalService {
     private final IAnimalRepo animalRepo;
     private final IModelMapperService modelMapper;
 
+    public List<AnimalResponse> getAll() {
+        List<Animal> animals = animalRepo.findAll();
 
-
-
-    public ResultData<List<AnimalResponse>> findAll() {
-        List<Animal> animals = this.animalRepo.findAll();
-        List<AnimalResponse> animalResponses = animals.stream()
-                .map(animal -> this.modelMapper.forResponse().map(animal, AnimalResponse.class))
+        return animals.stream().map(animal -> modelMapper
+                        .forResponse()
+                        .map(animal, AnimalResponse.class))
                 .collect(Collectors.toList());
-        return ResultHelper.success(animalResponses);
     }
 
-
-
-
-    //25- Exception kullanılmış mı? (id ile güncelleme, silme işlemlerinde girilen id’de veri yoksa hata fırlatma gibi
-    public ResultData<AnimalResponse> findById(Long id) {
-        Optional<Animal> optionalCustomer = Optional.ofNullable((this.animalRepo.findById(id).orElseThrow(() -> new AnimalNotFoundException("Hayvan Bulunamadı. ID: " + id))));
-        if (optionalCustomer.isPresent()) {
-            Animal animal = optionalCustomer.get();
-            AnimalResponse animalResponse = this.modelMapper.forResponse().map(animal, AnimalResponse.class);
-            return ResultHelper.success(animalResponse);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal not found");
-        }
+    public Animal getById(Long id) {
+        return animalRepo.findById(id)
+                .orElseThrow(()->new EntityNotFoundException("Entity with id " + id + " NOT FOUND"));
     }
 
-
-    //16- Hayvanlar isme göre filtreleniyor mu? (4 Puan)
-    public ResultData<AnimalResponse> findByName(String name) {
-        Optional<Animal> optionalAnimal = Optional.ofNullable(this.animalRepo.findByName(name).orElseThrow(() -> new AnimalNotFoundException("Hayvan bulunamadı. İsim: " + name)));
-        if (optionalAnimal.isPresent()) {
-            Animal animal = optionalAnimal.get();
-            AnimalResponse animalResponse = this.modelMapper.forResponse().map(animal, AnimalResponse.class);
-            return ResultHelper.success(animalResponse);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Animal not found with name " + name);
-        }
+    public AnimalResponse getResponseById(Long id) {
+       return modelMapper
+               .forResponse()
+               .map(getById(id), AnimalResponse.class);
     }
 
-    //18- Girilen hayvan sahibinin sistemde kayıtlı tüm hayvanlarını görüntüleme başarılı bir şekilde çalışıyor mu?
-    public ResultData<List<AnimalResponse>> findByCustomerId(Long customerId) {
-        List<Animal> animals = animalRepo.findByCustomerId(customerId); // Bu metot, müşteri kimliğine göre hayvanları getirir.
-        List<AnimalResponse> animalResponses = animals.stream()
-                .map(animal -> modelMapper.forResponse().map(animal, AnimalResponse.class))
-                .collect(Collectors.toList());
-        return ResultHelper.success(animalResponses);
+    public Animal getByName(String name) {
+        return animalRepo.findByName(name)
+                .orElseThrow(()->new EntityNotFoundException("Entity with name " + name + " NOT FOUND"));
+
     }
 
-
-
-    // 11- Proje isterlerine göre hayvan kaydediliyor mu? (4 puan)
-    public ResultData<AnimalResponse> save(AnimalSaveRequest animalSaveRequest) {
-        Animal saveAnimal = this.modelMapper.forRequest().map(animalSaveRequest, Animal.class);
-        this.animalRepo.save(saveAnimal);
-        return ResultHelper.created(this.modelMapper.forResponse().map(saveAnimal, AnimalResponse.class));
+    public AnimalResponse getResponseByName(String name) {
+        return modelMapper
+                .forResponse()
+                .map(getByName(name), AnimalResponse.class);
     }
 
+    public List<AnimalResponse> getResponseByCustomerId(Long customerId) {
+        List<Animal> animals = animalRepo.findByCustomerId(customerId);
 
-    public ResultData<AnimalResponse> update(AnimalUpdateRequest animalUpdateRequest) {
-        // Güncellenmek istenen hayvanın mevcut olup olmadığının kontrolü
-        Animal existingAnimal = animalRepo.findById(animalUpdateRequest.getId())
-                .orElseThrow(() -> new AnimalNotFoundException("Güncellenmek istenen hayvan bulunamadı. ID: " + animalUpdateRequest.getId()));
+        return animals.stream()
+                .map(animal -> modelMapper
+                .forResponse()
+                .map(animal, AnimalResponse.class)).toList();
 
-        modelMapper.forRequest().map(animalUpdateRequest, existingAnimal);
-
-        animalRepo.save(existingAnimal);
-
-        return ResultHelper.success(modelMapper.forResponse().map(existingAnimal, AnimalResponse.class));
     }
 
+    public AnimalResponse create(AnimalSaveRequest animalSaveRequest) {
+        Animal saveAnimal = this.modelMapper
+                .forRequest()
+                .map(animalSaveRequest, Animal.class);
 
-
-    public Result delete(Long id) {
-        Animal animalDelete = animalRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Silmeye Çalıştığınız kullanıcı bulunamadı"));
-
-        animalRepo.delete(animalDelete);
-        return ResultHelper.ok();
+        return modelMapper
+                .forResponse()
+                .map(animalRepo.save(saveAnimal), AnimalResponse.class);
     }
 
-    public Customer mapCustomerResponseToCustomer(CustomerResponse customerResponse) {
-        Customer customer = new Customer();
+    public AnimalResponse update(AnimalUpdateRequest animalUpdateRequest) {
+        Animal doesAnimalExist = getById(animalUpdateRequest.getId());
 
-        customer.setId(customerResponse.getId());
-        customer.setName(customerResponse.getName());
-        customer.setAddress(customerResponse.getAddress());
-        customer.setCity(customerResponse.getCity());
-        customer.setMail(customerResponse.getMail());
-        customer.setPhone(customerResponse.getPhone());
+        modelMapper
+                .forRequest()
+                .map(animalUpdateRequest, doesAnimalExist);
 
-        return customer;
+        return modelMapper
+                .forResponse()
+                .map(animalRepo.save(doesAnimalExist), AnimalResponse.class);
     }
 
-
-
-
+    public void delete(Long id) {
+       animalRepo.delete(getById(id));
+    }
 }
