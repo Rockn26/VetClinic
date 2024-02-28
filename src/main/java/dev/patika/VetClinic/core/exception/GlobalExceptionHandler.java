@@ -33,6 +33,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DoctorIsNotAvailableException.class)
+    public ResponseEntity<Object> handleDoctorIsNotAvailableException(DoctorIsNotAvailableException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HourConflictException.class)
+    public ResponseEntity<Object> handleHourConflictException(HourConflictException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 
 
 
