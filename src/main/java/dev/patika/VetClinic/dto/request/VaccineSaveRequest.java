@@ -20,11 +20,9 @@ public class VaccineSaveRequest {
     private String code;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
     private LocalDate protectionStartDate;
     @NotNull
-    @Temporal(TemporalType.DATE)
     private LocalDate protectionFinishDate;
 
-    private Animal animal;
+    private AnimalUpdateRequest animal;
 }

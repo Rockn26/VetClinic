@@ -18,6 +18,6 @@ public class AnimalSaveRequest {
     private String gender;
     private String colour;
     private LocalDate dateOfBirth;
-    private Customer customer;
+    private CustomerUpdateRequest customer;
 
 }

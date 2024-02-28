@@ -18,10 +18,8 @@ public class VaccineUpdateRequest {
     private long id;
     private String name;
     private String code;
-    @Temporal(TemporalType.DATE)
     private LocalDate protectionStartDate;
-    @Temporal(TemporalType.DATE)
     private LocalDate protectionFinishDate;
 
-    private long animalId;
+    private AnimalUpdateRequest animal;
 }

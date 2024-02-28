@@ -16,7 +16,7 @@ public class AppointmentSaveRequest {
     @NotNull(message = "Randevu tarihi boş olamaz")
     private LocalDateTime appointmentDate;
 
-    private Doctor doctor;
-    private Animal animal;
+    private DoctorUpdateRequest doctor;
+    private AnimalUpdateRequest animal;
 
 }

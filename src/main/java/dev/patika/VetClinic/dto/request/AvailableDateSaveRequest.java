@@ -13,5 +13,5 @@ import java.time.LocalDate;
 public class AvailableDateSaveRequest {
     @NotNull(message = "Bu alan boş olamaz")
     private LocalDate availableDate;
-    private long doctorId;
+    private DoctorUpdateRequest doctor;
 }
