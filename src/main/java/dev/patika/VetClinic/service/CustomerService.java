@@ -5,7 +5,7 @@ import dev.patika.VetClinic.core.exception.CustomerNotFoundException;
 import dev.patika.VetClinic.core.result.Result;
 import dev.patika.VetClinic.core.result.ResultData;
 import dev.patika.VetClinic.core.utilies.ResultHelper;
-import dev.patika.VetClinic.dao.CustomerRepo;
+import dev.patika.VetClinic.dao.ICustomerRepo;
 import dev.patika.VetClinic.dto.request.CustomerSaveRequest;
 import dev.patika.VetClinic.dto.request.CustomerUpdateRequest;
 import dev.patika.VetClinic.dto.response.CustomerResponse;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class CustomerService {
 
     @Autowired
-    private final CustomerRepo customerRepo;
+    private final ICustomerRepo customerRepo;
     private final IModelMapperService modelMapper;
 
 
