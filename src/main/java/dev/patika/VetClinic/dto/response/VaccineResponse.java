@@ -1,7 +1,5 @@
 package dev.patika.VetClinic.dto.response;
 
-import dev.patika.VetClinic.entities.Animal;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

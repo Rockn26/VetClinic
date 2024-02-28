@@ -1,15 +1,10 @@
 package dev.patika.VetClinic.dto.response;
 
-import dev.patika.VetClinic.entities.Appointment;
-import dev.patika.VetClinic.entities.Customer;
-import dev.patika.VetClinic.entities.Vaccine;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

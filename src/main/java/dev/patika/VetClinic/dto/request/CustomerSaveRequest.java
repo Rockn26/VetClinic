@@ -1,12 +1,9 @@
 package dev.patika.VetClinic.dto.request;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.el.util.Validation;
 
 @Data
 @AllArgsConstructor

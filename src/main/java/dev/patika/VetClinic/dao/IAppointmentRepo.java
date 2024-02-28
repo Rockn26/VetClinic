@@ -1,7 +1,6 @@
 package dev.patika.VetClinic.dao;
 
 import dev.patika.VetClinic.entities.Appointment;
-import dev.patika.VetClinic.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

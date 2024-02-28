@@ -1,7 +1,6 @@
 package dev.patika.VetClinic.dto.request;
 
 import dev.patika.VetClinic.entities.Animal;
-import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;

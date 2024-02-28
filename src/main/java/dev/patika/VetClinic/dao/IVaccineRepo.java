@@ -1,6 +1,5 @@
 package dev.patika.VetClinic.dao;
 
-import dev.patika.VetClinic.entities.Customer;
 import dev.patika.VetClinic.entities.Vaccine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

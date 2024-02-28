@@ -1,10 +1,7 @@
 package dev.patika.VetClinic.core.result;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class Result {

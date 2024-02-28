@@ -1,6 +1,5 @@
 package dev.patika.VetClinic.core.config.ModelMapper;
 
-import dev.patika.VetClinic.entities.Animal;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

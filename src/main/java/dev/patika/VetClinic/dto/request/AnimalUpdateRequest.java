@@ -1,6 +1,5 @@
 package dev.patika.VetClinic.dto.request;
 
-import dev.patika.VetClinic.entities.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

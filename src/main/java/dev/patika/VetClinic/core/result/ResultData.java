@@ -1,6 +1,5 @@
 package dev.patika.VetClinic.core.result;
 
-import dev.patika.VetClinic.core.utilies.Msg;
 import lombok.Getter;
 
 @Getter

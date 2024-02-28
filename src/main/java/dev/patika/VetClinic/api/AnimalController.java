@@ -5,22 +5,14 @@ import dev.patika.VetClinic.core.result.Result;
 import dev.patika.VetClinic.core.result.ResultData;
 import dev.patika.VetClinic.dto.request.AnimalSaveRequest;
 import dev.patika.VetClinic.dto.request.AnimalUpdateRequest;
-import dev.patika.VetClinic.dto.request.VaccineSaveRequest;
-import dev.patika.VetClinic.dto.request.VaccineUpdateRequest;
 import dev.patika.VetClinic.dto.response.AnimalResponse;
-import dev.patika.VetClinic.dto.response.CustomerResponse;
-import dev.patika.VetClinic.dto.response.VaccineResponse;
-import dev.patika.VetClinic.entities.Animal;
 import dev.patika.VetClinic.service.AnimalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
