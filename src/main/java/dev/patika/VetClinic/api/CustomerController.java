@@ -1,18 +1,15 @@
 package dev.patika.VetClinic.api;
 
-import dev.patika.VetClinic.core.result.Result;
-import dev.patika.VetClinic.core.result.ResultData;
+
 import dev.patika.VetClinic.dto.customer.CustomerSaveRequest;
 import dev.patika.VetClinic.dto.customer.CustomerUpdateRequest;
-import dev.patika.VetClinic.dto.customer.CustomerResponse;
 import dev.patika.VetClinic.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/customers")
@@ -22,43 +19,34 @@ public class CustomerController {
     @Autowired
     private final CustomerService customerService;
 
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<CustomerResponse>> findAll() {
-        return customerService.findAll();
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(customerService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<CustomerResponse> findById(@PathVariable("id") Long id) {
-        return customerService.findById(id);
+    public ResponseEntity<?> getResponseById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(customerService.getResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping("/name/{name}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<CustomerResponse> findByName(@PathVariable("name") String name) {
-        return this.customerService.findByName(name);
+    public ResponseEntity<?> getResponseByName(@PathVariable("name") String name) {
+        return new ResponseEntity<>(customerService.getResponseByName(name), HttpStatus.OK);
     }
 
-
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResultData<CustomerResponse> save(@Valid @RequestBody CustomerSaveRequest customerSaveRequest) {
-       return customerService.save(customerSaveRequest);
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody CustomerSaveRequest customerSaveRequest) {
+        return new ResponseEntity<>(customerService.create(customerSaveRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<CustomerResponse> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
-        return customerService.update(customerUpdateRequest);
+    @PutMapping
+    public ResponseEntity<?> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
+        return new ResponseEntity<>(customerService.update(customerUpdateRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable("id") Long id) {
-        return customerService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        customerService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

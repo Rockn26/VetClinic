@@ -1,20 +1,15 @@
 package dev.patika.VetClinic.api;
 
-import dev.patika.VetClinic.core.result.Result;
-import dev.patika.VetClinic.core.result.ResultData;
+
 import dev.patika.VetClinic.dto.appointment.AppointmentSaveRequest;
 import dev.patika.VetClinic.dto.appointment.AppointmentUpdateRequest;
-import dev.patika.VetClinic.dto.appointment.AppointmentResponse;
 import dev.patika.VetClinic.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/appointments")
@@ -24,55 +19,29 @@ public class AppointmentController {
     @Autowired
     private final AppointmentService appointmentService;
 
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AppointmentResponse>> findAll() {
-        return appointmentService.findAll();
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(appointmentService.getAll(), HttpStatus.OK);
     }
-
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<AppointmentResponse> findById(@PathVariable("id") Long id) {
-        return appointmentService.findById(id);
+    public ResponseEntity<?> getResponseById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(appointmentService.getResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/by-doctor-and-date-range")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AppointmentResponse>> findAppointmentsByDoctorAndDateRange(
-            @RequestParam Long doctorId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-
-        return appointmentService.findAppointmentsByDoctorAndDateRange(doctorId, startDate, endDate);
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody AppointmentSaveRequest appointmentSaveRequest) {
+        return new ResponseEntity<>(appointmentService.create(appointmentSaveRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping("/by-animal-and-date-range")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<AppointmentResponse>> findByAnimalAndDateRange(
-            @RequestParam Long animalId,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-        return appointmentService.findByAnimalAndDateRange(animalId, startDate, endDate);
-    }
-
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResultData<AppointmentResponse> save(@Valid @RequestBody AppointmentSaveRequest appointmentSaveRequest) {
-        return appointmentService.save(appointmentSaveRequest);
-    }
-
-    @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<AppointmentResponse> update(@Valid @RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
-        return appointmentService.update(appointmentUpdateRequest);
+    @PutMapping
+    public ResponseEntity<?> update(@Valid @RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
+        return new ResponseEntity<>(appointmentService.update(appointmentUpdateRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable("id") Long id) {
-        return appointmentService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        appointmentService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

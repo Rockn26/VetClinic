@@ -1,76 +1,47 @@
 package dev.patika.VetClinic.api;
 
-import dev.patika.VetClinic.core.result.Result;
-import dev.patika.VetClinic.core.result.ResultData;
+
 import dev.patika.VetClinic.dto.vaccine.VaccineSaveRequest;
 import dev.patika.VetClinic.dto.vaccine.VaccineUpdateRequest;
-import dev.patika.VetClinic.dto.vaccine.VaccineResponse;
 import dev.patika.VetClinic.service.VaccineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/v1/vaccines")
 @RequiredArgsConstructor
 public class VaccineController {
 
+    @Autowired
     private final VaccineService vaccineService;
 
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<VaccineResponse>> findAll() {
-        return vaccineService.findAll();
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(vaccineService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<VaccineResponse> findById(@PathVariable("id") Long id){
-        return vaccineService.findById(id);
+    public ResponseEntity<?> getResponseById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(vaccineService.getResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/animal/{animalId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<VaccineResponse>> findAllByAnimalId(@PathVariable Long animalId) {
-
-        return vaccineService.findAllByAnimalId(animalId);
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody VaccineSaveRequest vaccineSaveRequest) {
+        return new ResponseEntity<>(vaccineService.create(vaccineSaveRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping("/by-protection-date-range")
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<List<VaccineResponse>> findVaccinesByProtectionDateRange(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return vaccineService.findVaccinesByProtectionDateRange(startDate, endDate);
+    @PutMapping
+    public ResponseEntity<?> update(@Valid @RequestBody VaccineUpdateRequest vaccineUpdateRequest){
+        return new ResponseEntity<>(vaccineService.update(vaccineUpdateRequest),HttpStatus.ACCEPTED);
     }
-
-
-
-    @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResultData<VaccineResponse> save(@Valid @RequestBody VaccineSaveRequest vaccineSaveRequest) {
-        return vaccineService.save(vaccineSaveRequest);
-    }
-
-    @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
-    public ResultData<VaccineResponse> update(@Valid @RequestBody VaccineUpdateRequest vaccineUpdateRequest){
-        return vaccineService.update(vaccineUpdateRequest);
-    }
-
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Result delete(@PathVariable("id") Long id) {
-        return vaccineService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        vaccineService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
-
 }
