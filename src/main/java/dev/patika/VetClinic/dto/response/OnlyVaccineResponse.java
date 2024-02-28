@@ -1,24 +1,25 @@
 package dev.patika.VetClinic.dto.response;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.time.LocalDate;
+
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponse {
-
+public class OnlyVaccineResponse {
     private Long id;
+
     private String name;
-    private String phone;
 
-    private String mail;
-    private String address;
-    private String city;
+    private String code;
 
-    private Set<OnlyAnimalResponse> animals;
+    private LocalDate protectionStartDate;
 
+    private LocalDate protectionFinishDate;
 }

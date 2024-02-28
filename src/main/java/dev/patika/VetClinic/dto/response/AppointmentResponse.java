@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 public class AppointmentResponse {
     private Long id;
     private LocalDateTime appointmentDate;
-    private long doctorId;
-    private long animalId;
+    private OnlyDoctorResponse doctor;
+    private OnlyAnimalResponse animal;
 }

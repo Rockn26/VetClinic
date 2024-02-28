@@ -20,5 +20,5 @@ public class VaccineResponse {
 
     private LocalDate protectionFinishDate;
 
-    private Long animalId;
+    private OnlyAnimalResponse animal;
 }

@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AvailableDateResponse {
+public class OnlyAvailableDateResponse {
     private Long id;
     private LocalDate availableDate;
-    private OnlyDoctorResponse doctor;
-
 }

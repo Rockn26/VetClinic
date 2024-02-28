@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +17,7 @@ public class DoctorResponse {
     private String mail;
     private String address;
     private String city;
+    private Set<OnlyAvailableDateResponse> availableDates;
 
 
 }
