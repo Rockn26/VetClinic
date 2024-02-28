@@ -2,6 +2,7 @@ package dev.patika.VetClinic.service;
 
 
 import dev.patika.VetClinic.core.config.ModelMapper.IModelMapperService;
+import dev.patika.VetClinic.core.exception.InvalidVaccineException;
 import dev.patika.VetClinic.dao.IVaccineRepo;
 import dev.patika.VetClinic.dto.vaccine.VaccineResponse;
 import dev.patika.VetClinic.dto.vaccine.VaccineSaveRequest;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +44,8 @@ public class VaccineService {
     }
 
     public VaccineResponse create(VaccineSaveRequest vaccineSaveRequest) {
+        checkVaccine(vaccineSaveRequest);
+
         Vaccine saveVaccine = this.modelMapper
                 .forRequest()
                 .map(vaccineSaveRequest, Vaccine.class);
@@ -49,6 +53,17 @@ public class VaccineService {
         return modelMapper
                 .forResponse()
                 .map(vaccineRepo.save(saveVaccine), VaccineResponse.class);
+    }
+
+    private void checkVaccine(VaccineSaveRequest vaccineSaveRequest) {
+        Optional<Vaccine> vaccineMayBePresent = vaccineRepo.checkIfVaccineIsValid(
+                vaccineSaveRequest.getName(),
+                vaccineSaveRequest.getCode(),
+                vaccineSaveRequest.getProtectionStartDate()
+        );
+
+        if (vaccineMayBePresent.isPresent())
+            throw new InvalidVaccineException(vaccineSaveRequest.getProtectionStartDate() + " is not valid");
     }
 
     public VaccineResponse update(VaccineUpdateRequest vaccineUpdateRequest) {
