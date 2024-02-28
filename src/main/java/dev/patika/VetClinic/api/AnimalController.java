@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AnimalController {
 
-    @Autowired
     private final AnimalService animalService;
 
     @GetMapping

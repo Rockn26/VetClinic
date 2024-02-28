@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class DoctorController {
 
-    @Autowired
     private final DoctorService doctorService;
 
     @GetMapping

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AvailableDateController {
 
-    @Autowired
     private final AvailableDateService availableDateService;
 
     @GetMapping
