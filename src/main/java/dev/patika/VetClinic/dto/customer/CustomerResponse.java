@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +20,6 @@ public class CustomerResponse {
     private String address;
     private String city;
 
-    private Set<OnlyAnimalResponse> animals;
+    private List<OnlyAnimalResponse> animals;
 
 }
