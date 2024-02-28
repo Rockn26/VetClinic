@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,10 +30,10 @@ public class Animal {
     private Customer customer;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
-    private Set<Vaccine> vaccines;
+    private List<Vaccine> vaccines;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
-    private Set<Appointment> appointments;
+    private List<Appointment> appointments;
 
 
 

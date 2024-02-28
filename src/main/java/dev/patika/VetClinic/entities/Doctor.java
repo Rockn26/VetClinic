@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,9 +25,9 @@ public class Doctor {
     private String city;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Set<AvailableDate> availableDates;
+    private List<AvailableDate> availableDates;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Set<Appointment> appointments;
+    private List<Appointment> appointments;
 
 }
