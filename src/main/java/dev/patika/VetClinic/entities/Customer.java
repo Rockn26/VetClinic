@@ -2,53 +2,33 @@ package dev.patika.VetClinic.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "customers")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id", columnDefinition = "serial")
+    @GeneratedValue
     private long id;
 
-    @Column(name = "customer_name", nullable = false)
     private String name;
 
-    @Column(name = "customer_phone", nullable = false)
     private String phone;
 
-    @Column(name = "customer_mail")
     private String mail;
 
-    @Column(name = "customer_address")
     private String address;
 
-    @Column(name = "customer_city")
     private String city;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Animal> animalList;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private Set<Animal> animals;
 
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", mail='" + mail + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                '}';
-    }
 }

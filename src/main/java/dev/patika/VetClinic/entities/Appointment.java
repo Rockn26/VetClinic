@@ -1,36 +1,29 @@
 package dev.patika.VetClinic.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "appointments")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "appointment_id", columnDefinition = "serial")
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "appointment_date")
     private LocalDateTime appointmentDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id", referencedColumnName = "doctor_id")
-    // Randevu atanmış doktor
+    @ManyToOne
     private Doctor doctor;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_id", referencedColumnName = "animal_id")
+    @ManyToOne
     private Animal animal;
 
 
