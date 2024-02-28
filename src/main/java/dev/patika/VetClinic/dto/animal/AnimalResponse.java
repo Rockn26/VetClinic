@@ -1,6 +1,7 @@
 package dev.patika.VetClinic.dto.animal;
 
 import dev.patika.VetClinic.dto.customer.OnlyCustomerResponse;
+import dev.patika.VetClinic.dto.report.OnlyReportResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,6 @@ public class AnimalResponse {
     private String colour;
     private LocalDate dateOfBirth;
     private OnlyCustomerResponse customer;
+    private OnlyReportResponse report;
 
 }
