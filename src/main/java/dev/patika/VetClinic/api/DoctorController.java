@@ -2,9 +2,9 @@ package dev.patika.VetClinic.api;
 
 import dev.patika.VetClinic.core.result.Result;
 import dev.patika.VetClinic.core.result.ResultData;
-import dev.patika.VetClinic.dto.request.DoctorSaveRequest;
-import dev.patika.VetClinic.dto.request.DoctorUpdateRequest;
-import dev.patika.VetClinic.dto.response.DoctorResponse;
+import dev.patika.VetClinic.dto.doctor.DoctorSaveRequest;
+import dev.patika.VetClinic.dto.doctor.DoctorUpdateRequest;
+import dev.patika.VetClinic.dto.doctor.DoctorResponse;
 import dev.patika.VetClinic.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

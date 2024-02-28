@@ -1,4 +1,4 @@
-package dev.patika.VetClinic.dto.response;
+package dev.patika.VetClinic.dto.animal;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalResponse {
+public class OnlyAnimalResponse {
     private Long id;
     private String name;
     private String species;
@@ -17,6 +17,5 @@ public class AnimalResponse {
     private String gender;
     private String colour;
     private LocalDate dateOfBirth;
-    private OnlyCustomerResponse customer;
 
 }

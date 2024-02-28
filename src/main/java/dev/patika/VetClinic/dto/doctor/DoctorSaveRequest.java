@@ -1,14 +1,13 @@
-package dev.patika.VetClinic.dto.response;
-
+package dev.patika.VetClinic.dto.doctor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OnlyCustomerResponse {
-    private Long id;
+public class DoctorSaveRequest {
     private String name;
     private String phone;
     private String mail;

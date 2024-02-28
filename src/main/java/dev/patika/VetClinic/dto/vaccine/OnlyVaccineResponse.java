@@ -1,4 +1,4 @@
-package dev.patika.VetClinic.dto.response;
+package dev.patika.VetClinic.dto.vaccine;
 
 
 import lombok.AllArgsConstructor;

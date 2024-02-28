@@ -1,4 +1,4 @@
-package dev.patika.VetClinic.dto.request;
+package dev.patika.VetClinic.dto.appointment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,14 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppointmentUpdateRequest {
+public class OnlyAppointmentResponse {
     private Long id;
     private LocalDateTime appointmentDate;
-    private DoctorUpdateRequest doctor;
-    private AnimalUpdateRequest animal;
-
 }
-

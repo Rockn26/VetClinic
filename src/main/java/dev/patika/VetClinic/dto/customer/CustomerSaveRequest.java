@@ -1,4 +1,4 @@
-package dev.patika.VetClinic.dto.request;
+package dev.patika.VetClinic.dto.customer;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -1,27 +1,23 @@
-package dev.patika.VetClinic.dto.request;
+package dev.patika.VetClinic.dto.vaccine;
 
-import dev.patika.VetClinic.entities.Animal;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
+import dev.patika.VetClinic.dto.animal.AnimalUpdateRequest;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VaccineSaveRequest {
-    @NotNull
+public class VaccineUpdateRequest {
+    @Positive(message = "Alan pozitif olmalı")
+    private long id;
     private String name;
-    @NotNull
     private String code;
-
-    @NotNull
     private LocalDate protectionStartDate;
-    @NotNull
     private LocalDate protectionFinishDate;
 
     private AnimalUpdateRequest animal;

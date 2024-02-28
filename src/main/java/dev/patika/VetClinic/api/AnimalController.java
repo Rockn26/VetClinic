@@ -3,9 +3,9 @@ package dev.patika.VetClinic.api;
 
 import dev.patika.VetClinic.core.result.Result;
 import dev.patika.VetClinic.core.result.ResultData;
-import dev.patika.VetClinic.dto.request.AnimalSaveRequest;
-import dev.patika.VetClinic.dto.request.AnimalUpdateRequest;
-import dev.patika.VetClinic.dto.response.AnimalResponse;
+import dev.patika.VetClinic.dto.animal.AnimalSaveRequest;
+import dev.patika.VetClinic.dto.animal.AnimalUpdateRequest;
+import dev.patika.VetClinic.dto.animal.AnimalResponse;
 import dev.patika.VetClinic.service.AnimalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,7 @@
-package dev.patika.VetClinic.dto.request;
+package dev.patika.VetClinic.dto.appointment;
 
-import dev.patika.VetClinic.entities.Animal;
-import dev.patika.VetClinic.entities.Doctor;
-import jakarta.validation.constraints.NotNull;
+import dev.patika.VetClinic.dto.animal.AnimalUpdateRequest;
+import dev.patika.VetClinic.dto.doctor.DoctorUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +11,11 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AppointmentSaveRequest {
-    @NotNull(message = "Randevu tarihi boş olamaz")
+public class AppointmentUpdateRequest {
+    private Long id;
     private LocalDateTime appointmentDate;
-
     private DoctorUpdateRequest doctor;
     private AnimalUpdateRequest animal;
 
 }
+

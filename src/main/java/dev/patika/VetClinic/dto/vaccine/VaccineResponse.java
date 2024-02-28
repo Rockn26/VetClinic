@@ -1,5 +1,6 @@
-package dev.patika.VetClinic.dto.response;
+package dev.patika.VetClinic.dto.vaccine;
 
+import dev.patika.VetClinic.dto.animal.OnlyAnimalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

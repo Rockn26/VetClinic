@@ -1,5 +1,6 @@
-package dev.patika.VetClinic.dto.request;
+package dev.patika.VetClinic.dto.availabledate;
 
+import dev.patika.VetClinic.dto.doctor.DoctorUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

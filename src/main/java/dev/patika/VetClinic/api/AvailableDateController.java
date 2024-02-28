@@ -2,9 +2,9 @@ package dev.patika.VetClinic.api;
 
 import dev.patika.VetClinic.core.result.Result;
 import dev.patika.VetClinic.core.result.ResultData;
-import dev.patika.VetClinic.dto.request.AvailableDateSaveRequest;
-import dev.patika.VetClinic.dto.request.AvailableDateUpdateRequest;
-import dev.patika.VetClinic.dto.response.AvailableDateResponse;
+import dev.patika.VetClinic.dto.availabledate.AvailableDateSaveRequest;
+import dev.patika.VetClinic.dto.availabledate.AvailableDateUpdateRequest;
+import dev.patika.VetClinic.dto.availabledate.AvailableDateResponse;
 import dev.patika.VetClinic.service.AvailableDateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
