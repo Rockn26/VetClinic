@@ -7,7 +7,6 @@ import dev.patika.VetClinic.dto.availabledate.AvailableDateSaveRequest;
 import dev.patika.VetClinic.dto.availabledate.AvailableDateUpdateRequest;
 import dev.patika.VetClinic.entities.AvailableDate;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
