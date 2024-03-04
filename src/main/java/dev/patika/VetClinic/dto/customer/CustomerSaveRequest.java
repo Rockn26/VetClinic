@@ -16,7 +16,7 @@ public class CustomerSaveRequest {
     @NotNull(message = "Telefon numarası boş olamaz")
     private String phone;
 
-    private String mail;
+    private String email;
 
     private String address;
 
