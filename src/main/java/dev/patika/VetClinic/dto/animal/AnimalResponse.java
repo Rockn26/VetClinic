@@ -2,11 +2,13 @@ package dev.patika.VetClinic.dto.animal;
 
 import dev.patika.VetClinic.dto.customer.OnlyCustomerResponse;
 import dev.patika.VetClinic.dto.report.OnlyReportResponse;
+import dev.patika.VetClinic.dto.vaccine.OnlyVaccineResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +22,7 @@ public class AnimalResponse {
     private String colour;
     private LocalDate dateOfBirth;
     private OnlyCustomerResponse customer;
-    private OnlyReportResponse report;
+    private List<OnlyVaccineResponse> vaccines;
+
 
 }

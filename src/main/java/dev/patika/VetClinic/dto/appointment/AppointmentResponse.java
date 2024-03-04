@@ -2,6 +2,7 @@ package dev.patika.VetClinic.dto.appointment;
 
 import dev.patika.VetClinic.dto.animal.OnlyAnimalResponse;
 import dev.patika.VetClinic.dto.doctor.OnlyDoctorResponse;
+import dev.patika.VetClinic.dto.report.OnlyReportResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,5 @@ public class AppointmentResponse {
     private LocalDateTime appointmentDate;
     private OnlyDoctorResponse doctor;
     private OnlyAnimalResponse animal;
+    private OnlyReportResponse report;
 }

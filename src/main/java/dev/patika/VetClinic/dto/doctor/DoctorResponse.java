@@ -1,5 +1,6 @@
 package dev.patika.VetClinic.dto.doctor;
 
+import dev.patika.VetClinic.dto.appointment.OnlyAppointmentResponse;
 import dev.patika.VetClinic.dto.availabledate.OnlyAvailableDateResponse;
 import dev.patika.VetClinic.dto.report.OnlyReportResponse;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class DoctorResponse {
     private String address;
     private String city;
     private List<OnlyAvailableDateResponse> availableDates;
-    private OnlyReportResponse report;
+    private List<OnlyAppointmentResponse> appointments;
 
 
 }
