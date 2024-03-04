@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static dev.patika.VetClinic.core.config.BaseURL.BASE_URL;
+
 @RestController
-@RequestMapping("/v1/reports")
+@RequestMapping(BASE_URL + "reports")
 @RequiredArgsConstructor
 public class ReportController {
 
