@@ -29,8 +29,6 @@ public class Animal {
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Report report;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)
     private List<Vaccine> vaccines;
