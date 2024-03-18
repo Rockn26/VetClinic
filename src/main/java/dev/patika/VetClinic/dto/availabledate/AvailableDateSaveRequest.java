@@ -1,6 +1,7 @@
 package dev.patika.VetClinic.dto.availabledate;
 
 import dev.patika.VetClinic.dto.doctor.DoctorUpdateRequest;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvailableDateSaveRequest {
-    @NotNull(message = "Bu alan boş olamaz")
+    @NotNull
     private LocalDate availableDate;
     private DoctorUpdateRequest doctor;
 }

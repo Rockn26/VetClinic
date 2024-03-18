@@ -55,13 +55,19 @@ public class AvailableDateService {
     public AvailableDateResponse update(AvailableDateUpdateRequest availableDateUpdateRequest) {
         AvailableDate doesAvailableDateExist = getById(availableDateUpdateRequest.getId());
 
+        AvailableDate availableDate = modelMapper
+                .forResponse()
+                .map(availableDateUpdateRequest, AvailableDate.class);
+
+
         modelMapper
                 .forRequest()
-                .map(availableDateUpdateRequest, doesAvailableDateExist);
+                .map(availableDate, doesAvailableDateExist);
 
         return modelMapper
                 .forResponse()
                 .map(availableDateRepo.save(doesAvailableDateExist), AvailableDateResponse.class);
+
     }
 
     public void delete(Long id) {
