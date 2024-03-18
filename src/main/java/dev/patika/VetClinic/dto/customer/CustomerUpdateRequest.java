@@ -1,5 +1,6 @@
 package dev.patika.VetClinic.dto.customer;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,16 +12,15 @@ import lombok.NoArgsConstructor;
 public class CustomerUpdateRequest {
 
     private long id;
-    @NotNull(message = "Customer adı boş olamaz")
+    @NotBlank
     private String name;
-
-    @NotNull(message = "Telefon numarası boş olamaz")
+    @NotBlank
     private String phone;
-
+    @NotBlank
     private String email;
-
+    @NotBlank
     private String address;
-
+    @NotBlank
     private String city;
 
 

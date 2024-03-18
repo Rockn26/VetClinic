@@ -40,16 +40,18 @@ public class CustomerService {
                 .map(getById(id), CustomerResponse.class);
     }
 
-    public Customer getByName(String name) {
-        return customerRepo.findByName(name)
-                .orElseThrow(()->new EntityNotFoundException("Entity with name " + name + " NOT FOUND"));
+    public List<Customer> getByName(String name) {
+        return customerRepo.findByNameIgnoringCaseContaining(name);
+
 
     }
 
-    public CustomerResponse getResponseByName(String name) {
-        return modelMapper
-                .forResponse()
-                .map(getByName(name), CustomerResponse.class);
+    public List<CustomerResponse> getResponseByName(String name) {
+        return getByName(name)
+                .stream().map(customer -> modelMapper
+                        .forResponse()
+                        .map(customer, CustomerResponse.class))
+                .toList();
     }
 
     public CustomerResponse create(CustomerSaveRequest customerSaveRequest) {
