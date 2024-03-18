@@ -63,7 +63,7 @@ GET get http://localhost:8080/v1/vaccines/20,
 PUT update http://localhost:8080/v1/vaccines,    
 DELETE delete http://localhost:8080/v1/vaccines/2,     
 GET findByAnimalId http://localhost:8080/v1/vaccines/animal/15,   
-GET protectionRange http://localhost:8080/v1/vaccines/by-protection-date-range?startDate=2023-01-01&endDate=2024-03-30
+GET protectionRange http://localhost:8080/v1/vaccines/by-protection-date-range?startDate=2023-01-01&finishDate=2024-03-30
 
 
 
@@ -89,8 +89,8 @@ GET findAll  http://localhost:8080/v1/appointments/all,
 GET findByID http://localhost:8080/v1/appointments/13,      
 PUT update http://localhost:8080/v1/appointments,    
 DELETE delete http://localhost:8080/v1/customers/7,     
-GET doctorRangeDate http://localhost:8080/v1/appointments/by-doctor-and-date-range?doctorId=8&startDate=2023-01-12T00:00&endDate=2024-12-31T23:59,   
-GET animalRangeDate http://localhost:8080/v1/appointments/by-animal-and-date-range?animalId=15&startDate=2023-01-01T14:00:00&endDate=2024-12-23T14:00:00
+GET doctorRangeDate http://localhost:8080/v1/appointments/by-doctor-and-date-range?doctorId=8&startDate=2023-01-12T00:00&finishDate=2024-12-31T23:59,   
+GET animalRangeDate http://localhost:8080/v1/appointments/by-animal-and-date-range?animalId=15&startDate=2023-01-01T14:00:00&finishDate=2024-12-23T14:00:00
 
 Doctor:
 
