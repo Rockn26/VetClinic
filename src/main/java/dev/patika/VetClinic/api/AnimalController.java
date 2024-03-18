@@ -34,9 +34,9 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getResponseByName(name), HttpStatus.OK);
     }
 
-    @GetMapping("/by-customer/{customerId}")
-    public ResponseEntity<?> getResponseByCustomerId(@PathVariable("customerId") Long customerId) {
-        return new ResponseEntity<>(animalService.getResponseByCustomerId(customerId), HttpStatus.OK);
+    @GetMapping("/by-customer-name/{customerName}")
+    public ResponseEntity<?> getResponseByCustomerName(@PathVariable("customerName") String customerName) {
+        return new ResponseEntity<>(animalService.getResponseByCustomerName(customerName), HttpStatus.OK);
     }
 
     @PostMapping

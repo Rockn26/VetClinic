@@ -40,20 +40,21 @@ public class AnimalService {
                .map(getById(id), AnimalResponse.class);
     }
 
-    public Animal getByName(String name) {
-        return animalRepo.findByName(name)
-                .orElseThrow(()->new EntityNotFoundException("Entity with name " + name + " NOT FOUND"));
+    public List<Animal> getByName(String name) {
+        return animalRepo.findByNameIgnoringCaseContaining(name);
 
     }
 
-    public AnimalResponse getResponseByName(String name) {
-        return modelMapper
-                .forResponse()
-                .map(getByName(name), AnimalResponse.class);
+    public List<AnimalResponse> getResponseByName(String name) {
+        return getByName(name)
+                .stream().map(animal -> modelMapper
+                        .forResponse()
+                        .map(animal, AnimalResponse.class))
+                .toList();
     }
 
-    public List<AnimalResponse> getResponseByCustomerId(Long customerId) {
-        List<Animal> animals = animalRepo.findByCustomerId(customerId);
+    public List<AnimalResponse> getResponseByCustomerName(String customerName) {
+        List<Animal> animals = animalRepo.findByCustomerName(customerName);
 
         return animals.stream()
                 .map(animal -> modelMapper
@@ -75,9 +76,13 @@ public class AnimalService {
     public AnimalResponse update(AnimalUpdateRequest animalUpdateRequest) {
         Animal doesAnimalExist = getById(animalUpdateRequest.getId());
 
+        Animal animal = modelMapper
+                .forResponse()
+                .map(animalUpdateRequest, Animal.class);
+
         modelMapper
                 .forRequest()
-                .map(animalUpdateRequest, doesAnimalExist);
+                .map(animal, doesAnimalExist);
 
         return modelMapper
                 .forResponse()
