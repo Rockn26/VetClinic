@@ -23,6 +23,7 @@ public class Report {
     private double price;
 
     @OneToOne
+    @JoinColumn(columnDefinition = "appointment_id")
     private Appointment appointment;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "report", cascade = CascadeType.REMOVE)

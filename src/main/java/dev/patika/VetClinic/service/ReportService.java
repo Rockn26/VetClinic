@@ -2,10 +2,12 @@ package dev.patika.VetClinic.service;
 
 
 import dev.patika.VetClinic.core.config.ModelMapper.IModelMapperService;
+import dev.patika.VetClinic.dao.IAppointmentRepo;
 import dev.patika.VetClinic.dao.IReportRepo;
 import dev.patika.VetClinic.dto.report.ReportResponse;
 import dev.patika.VetClinic.dto.report.ReportSaveRequest;
 import dev.patika.VetClinic.dto.report.ReportUpdateRequest;
+import dev.patika.VetClinic.entities.Appointment;
 import dev.patika.VetClinic.entities.Report;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,9 @@ import java.util.stream.Collectors;
 public class ReportService {
 
     private final IReportRepo reportRepo;
+    private final IAppointmentRepo appointmentRepo; // AppointmentRepo enjekte edildi
     private final IModelMapperService modelMapper;
+
 
     public List<ReportResponse> getAll() {
         List<Report> reports = reportRepo.findAll();
@@ -52,16 +56,30 @@ public class ReportService {
     }
 
     public ReportResponse update(ReportUpdateRequest reportUpdateRequest) {
+        // Mevcut raporu ID'ye göre bul
         Report doesReportExist = getById(reportUpdateRequest.getId());
+
+        Report report = modelMapper
+                .forResponse()
+                .map(reportUpdateRequest, Report.class);
 
         modelMapper
                 .forRequest()
-                .map(reportUpdateRequest, doesReportExist);
+                .map(report, doesReportExist);
 
         return modelMapper
                 .forResponse()
                 .map(reportRepo.save(doesReportExist), ReportResponse.class);
+
+
+
+
+
+
+
     }
+
+
 
     public void delete(Long id) {
         reportRepo.delete(getById(id));

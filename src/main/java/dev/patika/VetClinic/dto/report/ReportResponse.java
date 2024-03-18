@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ReportResponse {
     private Long id;
+
     private String title;
     private String diagnosis;
     private double price;
