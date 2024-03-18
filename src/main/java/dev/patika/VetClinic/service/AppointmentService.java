@@ -8,12 +8,15 @@ import dev.patika.VetClinic.dao.IAppointmentRepo;
 import dev.patika.VetClinic.dto.appointment.AppointmentResponse;
 import dev.patika.VetClinic.dto.appointment.AppointmentSaveRequest;
 import dev.patika.VetClinic.dto.appointment.AppointmentUpdateRequest;
+import dev.patika.VetClinic.entities.Animal;
 import dev.patika.VetClinic.entities.Appointment;
 import dev.patika.VetClinic.entities.AvailableDate;
+import dev.patika.VetClinic.entities.Doctor;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +27,8 @@ public class AppointmentService {
     private final IAppointmentRepo appointmentRepo;
     private final IModelMapperService modelMapper;
     private final AvailableDateService availableDateService;
+
+
 
     public List<AppointmentResponse> getAll() {
         List<Appointment> appointments = appointmentRepo.findAll();
@@ -78,7 +83,7 @@ public class AppointmentService {
 
         if (appointmentMayBePresent.isPresent())
             throw new HourConflictException(
-                    "Doctir is not available at this time: " +
+                    "Doctor is not available at this time: " +
                             appointmentSaveRequest.getAppointmentDate()
             );
     }
@@ -87,16 +92,42 @@ public class AppointmentService {
     public AppointmentResponse update(AppointmentUpdateRequest appointmentUpdateRequest) {
         Appointment doesAppointmentExist = getById(appointmentUpdateRequest.getId());
 
+        Appointment appointment = modelMapper
+                .forResponse()
+                .map(appointmentUpdateRequest, Appointment.class);
+
         modelMapper
                 .forRequest()
-                .map(appointmentUpdateRequest, doesAppointmentExist);
+                .map(appointment, doesAppointmentExist);
+
 
         return modelMapper
                 .forResponse()
                 .map(appointmentRepo.save(doesAppointmentExist), AppointmentResponse.class);
     }
 
+
     public void delete(Long id) {
         appointmentRepo.delete(getById(id));
     }
+
+
+    public List<AppointmentResponse> filterByDoctorNameAndDateBetween(String doctorName, LocalDate startDate, LocalDate finishDate){
+        return appointmentRepo.findByDoctorNameAndAppointmentDateBetween(doctorName, startDate, finishDate)
+                .stream().map(appointment -> modelMapper
+                        .forResponse()
+                        .map(appointment, AppointmentResponse.class))
+                .toList();
+    }
+
+    public List<AppointmentResponse> filterByAnimalNameAndDateBetween(String animalName, LocalDate startDate, LocalDate finishDate){
+        return appointmentRepo.findByAnimalNameAndAppointmentDateBetween(animalName, startDate, finishDate)
+                .stream().map(appointment -> modelMapper
+                        .forResponse()
+                        .map(appointment, AppointmentResponse.class))
+                .toList();
+    }
+
+
+
 }
