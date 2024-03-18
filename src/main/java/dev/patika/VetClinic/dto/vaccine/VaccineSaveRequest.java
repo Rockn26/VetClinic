@@ -2,6 +2,8 @@ package dev.patika.VetClinic.dto.vaccine;
 
 import dev.patika.VetClinic.dto.animal.AnimalUpdateRequest;
 import dev.patika.VetClinic.dto.report.ReportUpdateRequest;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,11 +15,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VaccineSaveRequest {
-    @NotNull
+    @NotBlank
     private String name;
-    @NotNull
+    @NotBlank
     private String code;
-
     @NotNull
     private LocalDate protectionStartDate;
     @NotNull
