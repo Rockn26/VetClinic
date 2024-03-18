@@ -21,9 +21,13 @@ public interface IVaccineRepo extends JpaRepository<Vaccine, Long> {
     Optional<Vaccine> checkIfVaccineIsValid(@Param("name") String name, @Param("code") String code, @Param("protectionStartDate") LocalDate protectionStartDate);
 
 
+    List<Vaccine> findByAnimalNameIgnoringCaseContaining(String name);
+
+
+
     List<Vaccine> findByAnimalId(Long animalId);
 
-    List<Vaccine> findByProtectionFinishDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Vaccine> findByProtectionFinishDateBetween(LocalDate startDate, LocalDate finishDate);
 
 
 
