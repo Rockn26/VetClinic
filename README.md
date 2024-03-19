@@ -116,10 +116,13 @@ GET findByName http://localhost:8080/v1/animals/name/Zeytin
 GET findByCustomer http://localhost:8080/v1/animals/by-customer/6
 
 
+![Ekran Resmi 2024-03-19 19.14.36.png](..%2F..%2F..%2FDesktop%2FEkran%20Resmi%202024-03-19%2019.14.36.png)
 
 
 
-![qyq5MM4-VetAppuml.png](postgreSql%2Fqyq5MM4-VetAppuml.png)
+
+
+![umlGuncel.png](..%2F..%2F..%2FDesktop%2FumlGuncel.png)
 
 
 
